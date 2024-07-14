@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import ScrollToTop from "./context/ScrollTop";
+import Header from "./components/head/header/Header";
+import Profile from "./pages/auth/profile/Profile";
+import Footer from "./components/footer/Footer";
+import HomePage from "./pages/home/HomePage";
+import Affiliate from "./pages/affiliate/Affiliate";
+import Login from "./pages/auth/login/Login";
+import FlightResult from "./pages/flight/flight_result/FlightResult";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Router>
+        <ScrollToTop>
+          <Header />
+          <Routes>
+            <Route path="/" element={<FlightResult />} />
+            <Route path="/" element={<HomePage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+            <Route path="/flight-result" element={<FlightResult />} />
+            <Route path="/affiliate" element={<Affiliate />} />
+          </Routes>
+          <Footer /> {/*hide footer for login page */}
+        </ScrollToTop>
+      </Router>
     </div>
   );
 }
