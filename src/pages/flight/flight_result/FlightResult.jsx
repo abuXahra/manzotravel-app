@@ -27,7 +27,11 @@ const closeViewDetail = () =>{
   setShowViewDetailCard(false);
 }
 
-const continueBooi
+// continue Booking Handler
+const continueBooking = () =>{
+  navigate('/trip-info');
+  setShowViewDetailCard(false);
+}
 
 return (
     <FlightResultWrapper>
@@ -351,7 +355,7 @@ return (
         </FLightDetailContent>
 
         <FlightDetailButton>
-          <Button text={'Continue Booking'} onClick={closeViewDetail}/>
+          <Button text={'Continue Booking'} onClick={continueBooking}/>
         </FlightDetailButton>
       </FLightDetail>}
 

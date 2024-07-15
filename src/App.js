@@ -12,6 +12,7 @@ import HomePage from "./pages/home/HomePage";
 import Affiliate from "./pages/affiliate/Affiliate";
 import Login from "./pages/auth/login/Login";
 import FlightResult from "./pages/flight/flight_result/FlightResult";
+import TripInfo from "./pages/flight/flight_result/trip_info/TripInfo";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="/flight-result" element={<FlightResult />} />
             <Route path="/affiliate" element={<Affiliate />} />
+            <Route path="/trip-info" element={<TripInfo />} />
           </Routes>
           <Footer /> {/*hide footer for login page */}
         </ScrollToTop>
