@@ -6,7 +6,7 @@ import logo from '../../../images/logo.png'
 import { Link, useNavigate } from 'react-router-dom'
 import { IoMdArrowDropdown } from 'react-icons/io'
 import { RxDash } from 'react-icons/rx'
-import {menuItems} from '../../../data/menu'
+import {menuItems} from '../../../data/object/menu'
 
 export default function Navbar() {
    

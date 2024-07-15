@@ -234,6 +234,120 @@ return (
                 <span style={{color: 'green', fontSize: "12px"}}>(Penalties upon Refunds)</span>
           </FlightLogo>
         </FlightCard>
+
+
+
+         {/* Flight Result Card  4*/}
+       <FlightCard>
+         {/* flight logo */}
+          <FlightLogo>
+            <span><img src={flightLogo} alt="" srcset="" /><h3>Air Peace</h3></span>
+            <div onClick={showViewDetail}>View Flight Detail</div>
+          </FlightLogo>
+
+          {/* Depart and Return Wrapper */}
+          <FlightCardContent>
+              <DnRWrapper>  
+                <DnRHeader><h5>Depart</h5> <p>15:45</p> <p>Arik Air</p></DnRHeader>
+                <div>
+                  <span>
+                  <h3>19:45</h3>    
+                      Abuja
+                  </span>
+                  <span>
+                      1-Stop
+                      <MdFlightStyled rotateIcon={'90deg'} IconColor={'#0D3984'}><MdFlight/></MdFlightStyled>                 
+                      1hr 30min
+                  </span>
+                  <span>
+                  <h3>19:45</h3> 
+                      Lagos
+                  </span>
+                </div>
+              </DnRWrapper>
+
+                <DnRWrapper>
+                <DnRHeader><h5>Return</h5> <p>15:45</p> <p>Arik Air</p></DnRHeader>
+                  <div>
+                    <span>
+                    <h3>19:45</h3>    
+                        Lagos
+                    </span>
+                    <span>
+                        0-Stop
+                        <MdFlightStyled rotateIcon={'270deg'} IconColor={"#FF6805"}><MdFlight/></MdFlightStyled>                 
+                        1hr 30min
+                    </span>
+                    <span>
+                    <h3>19:45</h3> 
+                        Abuja
+                    </span>
+                  </div>
+                </DnRWrapper>
+            </FlightCardContent>
+
+            <FlightLogo>
+                <b style={{color: 'black', fontSize: "14px"}}>Price: 375,000</b>
+                <span style={{color: 'green', fontSize: "12px"}}>(Penalties upon Refunds)</span>
+          </FlightLogo>
+        </FlightCard>
+
+
+
+         {/* Flight Result Card  4*/}
+       <FlightCard>
+         {/* flight logo */}
+          <FlightLogo>
+            <span><img src={flightLogo} alt="" srcset="" /><h3>Air Peace</h3></span>
+            <div onClick={showViewDetail}>View Flight Detail</div>
+          </FlightLogo>
+
+          {/* Depart and Return Wrapper */}
+          <FlightCardContent>
+              <DnRWrapper>  
+                <DnRHeader><h5>Depart</h5> <p>15:45</p> <p>Arik Air</p></DnRHeader>
+                <div>
+                  <span>
+                  <h3>19:45</h3>    
+                      Abuja
+                  </span>
+                  <span>
+                      1-Stop
+                      <MdFlightStyled rotateIcon={'90deg'} IconColor={'#0D3984'}><MdFlight/></MdFlightStyled>                 
+                      1hr 30min
+                  </span>
+                  <span>
+                  <h3>19:45</h3> 
+                      Lagos
+                  </span>
+                </div>
+              </DnRWrapper>
+
+                <DnRWrapper>
+                <DnRHeader><h5>Return</h5> <p>15:45</p> <p>Arik Air</p></DnRHeader>
+                  <div>
+                    <span>
+                    <h3>19:45</h3>    
+                        Lagos
+                    </span>
+                    <span>
+                        0-Stop
+                        <MdFlightStyled rotateIcon={'270deg'} IconColor={"#FF6805"}><MdFlight/></MdFlightStyled>                 
+                        1hr 30min
+                    </span>
+                    <span>
+                    <h3>19:45</h3> 
+                        Abuja
+                    </span>
+                  </div>
+                </DnRWrapper>
+            </FlightCardContent>
+
+            <FlightLogo>
+                <b style={{color: 'black', fontSize: "14px"}}>Price: 375,000</b>
+                <span style={{color: 'green', fontSize: "12px"}}>(Penalties upon Refunds)</span>
+          </FlightLogo>
+        </FlightCard>
         </FlightResultMain>
       </FlightResultContent>
 
