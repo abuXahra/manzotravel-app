@@ -37,4 +37,34 @@ export const  TimelineWrapper = styled.div`
           
             }
 
+
+     @media (max-width:768px) {
+        width: 100%;
+        font-size: 8px;
+
+
+        
+        span{
+            display: flex;
+            gap: 5px;
+            align-items: center;
+
+            div{
+                border-radius: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: white;
+                height: 12px;
+                width: 12px;
+                color: #0D3984;
+                margin: 0px 3px;
+            }
+
+            hr{
+                width: 15px;
+            }
+        }
+    }
+
 `
