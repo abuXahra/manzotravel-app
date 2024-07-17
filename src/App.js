@@ -21,7 +21,7 @@ function App() {
         <ScrollToTop>
           <Header />
           <Routes>
-            <Route path="/" element={<FlightResult />} />
+            <Route path="/h" element={<FlightResult />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
