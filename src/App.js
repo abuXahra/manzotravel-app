@@ -13,6 +13,9 @@ import Affiliate from "./pages/affiliate/Affiliate";
 import Login from "./pages/auth/login/Login";
 import FlightResult from "./pages/flight/flight_result/FlightResult";
 import TripInfo from "./pages/flight/flight_result/trip_info/TripInfo";
+import FlightBooking from "./pages/flight/flight_booking/FlightBooking";
+import HotelBooking from "./pages/hotel/hotel_booking/HotelBooking";
+import Visa from "./pages/visa/Visa";
 
 function App() {
   return (
@@ -21,11 +24,13 @@ function App() {
         <ScrollToTop>
           <Header />
           <Routes>
-            <Route path="/" element={<FlightResult />} />
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
+            <Route path="/flight-booking" element={<FlightBooking />} />
             <Route path="/flight-result" element={<FlightResult />} />
+            <Route path="/hotel-reservation" element={<HotelBooking />} />
+            <Route path="/visa" element={<Visa />} />
             <Route path="/affiliate" element={<Affiliate />} />
             <Route path="/trip-info" element={<TripInfo />} />
           </Routes>

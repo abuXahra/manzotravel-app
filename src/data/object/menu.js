@@ -24,7 +24,7 @@ export const menuItems = [
     submenu: [
       {
         subTile: "Book Flight",
-        href: "#",
+        href: "/flight-booking",
       },
       {
         subTile: "Manage Booking",

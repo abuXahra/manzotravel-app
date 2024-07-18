@@ -5,6 +5,8 @@ export default function HomePage() {
     <div style={{backgroundColor: "red"}}>
 
       <h1>Homepage</h1>
+
+      <a href="/flight-booking">Flight Booking Page</a>
       
     </div>
   )
