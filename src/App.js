@@ -24,7 +24,8 @@ function App() {
         <ScrollToTop>
           <Header />
           <Routes>
-            <Route path="/" element={<HomePage />} />
+            <Route path="/h" element={<FlightResult />} />
+            <Route path="/" element={<FlightBooking />} />
             <Route path="/login" element={<Login />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/flight-booking" element={<FlightBooking />} />
