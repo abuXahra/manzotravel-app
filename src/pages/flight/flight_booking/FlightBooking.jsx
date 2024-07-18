@@ -159,7 +159,7 @@ const navigate = useNavigate();
         {
             airportAddress: 'Lagos, Nigeria',
             airportName: 'Murtala Muhammad Internatinal Airport',
-            airportAbbreviation: 'ABV'   
+            airportAbbreviation: 'LOS'   
         },
         
       ]
@@ -169,7 +169,7 @@ const navigate = useNavigate();
         {
           airportAddress: 'Lagos, Nigeria',
           airportName: 'Murtala Muhammad Internatinal Airport',
-          airportAbbreviation: 'ABV'   
+          airportAbbreviation: 'LOS'   
       },
         {
             airportAddress: 'Abuja, Nigeria',
@@ -212,6 +212,19 @@ const navigate = useNavigate();
           setShowDestinationAirports(false)
         }
 
+
+        // show/hide flightInputs
+        const [showFlightInputs, setshowFlightInputs] = useState(false)
+        const handleShowFlightInputsA = ()=>{
+          setShowTakeOffAirports(!showTakeOffAirports)
+          setshowFlightInputs(true)
+        }
+
+        const handleShowFlightInputsB = ()=>{
+          setShowDestinationAirports(!showDestinationAirports)
+          setshowFlightInputs(true)
+        }
+
   return (
     <FlightWrapper>
       {/* hero section with form */}
@@ -251,6 +264,8 @@ const navigate = useNavigate();
                  <FlightForm>
 
             {/* Flight Type Radio button*/}
+             { 
+              showFlightInputs &&
               <FlightType id="flight-type-id" class="flight-type-wrapper">
                       <span>
                     
@@ -279,14 +294,14 @@ const navigate = useNavigate();
                         |<a href="/flight-booking">
                           Multi-city <i class="fa fa-angle-right" aria-hidden="true"></i></a> 
                       </span>
-               </FlightType>
+               </FlightType>}
 
                 {/* from and to INput */}
                 <FlightInputContainer class="flight-wrapper">
                   
                   {/* takeoff input */}
                   <FlightInputAndDropDown>
-                       <FlightInputWrapper  onClick={()=>setShowTakeOffAirports(!showTakeOffAirports)}>
+                       <FlightInputWrapper  onClick={handleShowFlightInputsA}>
                         <input id="from-input" type="text" placeholder="From" value={takeOffAirport} onChange={handleKickOff} />
                        <span><MdFlightTakeoff/></span>                  
                       </FlightInputWrapper>
@@ -301,6 +316,7 @@ const navigate = useNavigate();
                               searchInputValue={searchTakeOffInputValue}  
                               setAirportSelected={setTakeOffAirport}
                               onCloseDropdwon={onCloseTakOffDropdwon }
+                              Icon={<MdFlightTakeoff/>}
                             />
                           </TakeOffWrapper>}
                   </FlightInputAndDropDown>
@@ -309,7 +325,7 @@ const navigate = useNavigate();
 
                          {/*Destination input  */}
                       <FlightInputAndDropDown>                      
-                            <FlightInputWrapper onClick={()=>setShowDestinationAirports(!showDestinationAirports)}>
+                            <FlightInputWrapper onClick={handleShowFlightInputsB}>
                             <input type="text" placeholder="To" value={destinationAirport} onChange={handleDestination} />
                             <span><MdFlightLand/></span>
                         </FlightInputWrapper>
@@ -324,6 +340,7 @@ const navigate = useNavigate();
                                   searchInputValue={searchDestinationInputValue}  
                                   setAirportSelected={setDestinationAirport}
                                   onCloseDropdwon={onCloseDestinationDropdwon}
+                                  Icon={<MdFlightLand/>}
                               />
                           </DestinationWrapper>}
                       </FlightInputAndDropDown>
@@ -337,7 +354,9 @@ const navigate = useNavigate();
 
 
                   {/* <!-- Depature and destination container --> */}
-                        <FlightDepartWrapper>
+                     { showFlightInputs &&
+                     
+                     <FlightDepartWrapper>
                    
                             <FlightDepatWrapContent>
                                       <Label for="depart">Departing</Label>
@@ -427,9 +446,9 @@ const navigate = useNavigate();
                               </FlightDepatWrapContent>
                         
                             <div>
-                              <Button onClick={''} text={'Search Flight'} />
+                              <Button onClick={()=>navigate('/flight-result')} text={'Search Flight'} />
                             </div>
-                        </FlightDepartWrapper>
+                        </FlightDepartWrapper>}
 
                  </FlightForm>
               </ContentMain>

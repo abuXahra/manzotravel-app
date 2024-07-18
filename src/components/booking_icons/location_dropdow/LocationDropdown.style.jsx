@@ -97,7 +97,7 @@ export const LocationDropdownTakeoff = styled.div`
 `
 
 
-export const MdFlightTakeoffStyled = styled(MdFlightTakeoff)`
+export const MdFlightTakeoffStyled = styled.span`
     color: grey;
     font-size: 20px;
 `

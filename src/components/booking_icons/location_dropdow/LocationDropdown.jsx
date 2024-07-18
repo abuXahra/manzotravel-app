@@ -5,7 +5,7 @@ import { FaSearch } from 'react-icons/fa'
 import { MdFlightTakeoff } from 'react-icons/md'
 import { FaSearchStyled, LocationDropdownAbrreviate, LocationDropdownInput, LocationDropdownLocation, LocationDropdownSearchResult, LocationDropdownTakeoff, LocationDropdownWrapper, MdFlightTakeoffStyled } from './LocationDropdown.style'
 
-export default function LocationDropdown({onChange, items, searchInputValue, setAirportSelected, onCloseDropdwon}) {
+export default function LocationDropdown({onChange, items, searchInputValue, setAirportSelected, onCloseDropdwon, Icon}) {
   
     
   
@@ -26,7 +26,7 @@ export default function LocationDropdown({onChange, items, searchInputValue, set
              
              <LocationDropdownLocation key={i} bottomBorder={''} onClick={()=>{setAirportSelected(item.airportAddress); onCloseDropdwon()}}>
                 <LocationDropdownTakeoff>
-                <MdFlightTakeoffStyled/>
+                <MdFlightTakeoffStyled>{Icon}</MdFlightTakeoffStyled>
                 <div>
                     <p><b>{item.airportAddress}</b></p>
                     <p>{item.airportName}</p>
