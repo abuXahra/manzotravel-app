@@ -35,14 +35,20 @@ import Button from "../../../components/button/Button";
 import FlightIcon from "../../../components/flight_icon/FlightIcon";
 import FlightResultForDepartandReturn from "../../../components/Flight/FlightResultForDepartandReturn";
 import { useNavigate } from "react-router-dom";
+import { useAuthStore } from "../../../store/store";
+import AirlineCodeLookup from "../../../components/Flight/AirlineCodeLookup";
+import AirlineFlightLogo from "../../../components/Flight/AirlineFlightLogo";
 
 export default function FlightResult() {
   // const flightData = JSON.parse(myObject);
-
+  const { flightResult } = useAuthStore();
   const navigate = useNavigate();
 
   // Show View Detail Variable
   const [showViewDetailCard, setShowViewDetailCard] = useState(false);
+
+  // This is the Show View Detail Variable index
+  const [index, setIndex] = useState(0);
 
   //show view detail handler
   const showViewDetail = () => {
@@ -56,9 +62,27 @@ export default function FlightResult() {
 
   // continue Booking Handler
   const continueBooking = () => {
-    navigate("/trip-info");
+    navigate(`/trip-info/${index}`);
     setShowViewDetailCard(false);
   };
+
+  // Cacula for duration
+  function parseDuration(duration) {
+    const regex = /PT(\d+H)?(\d+M)?/;
+    const matches = duration.match(regex);
+
+    let hours = 0;
+    let minutes = 0;
+
+    if (matches[1]) {
+      hours = parseInt(matches[1].replace("H", ""));
+    }
+    if (matches[2]) {
+      minutes = parseInt(matches[2].replace("M", ""));
+    }
+
+    return { hours, minutes };
+  }
 
   return (
     <FlightResultWrapper>
@@ -66,8 +90,8 @@ export default function FlightResult() {
       <FlightResultHeader>
         <DateFlight>Mon, 9 Sep 2024</DateFlight>
         <p>
-          Select your departure flight from <span>Abuja</span> to{" "}
-          <span>Lagos</span>
+          Select your departure flight from <span>{flightResult[0]}</span> to{" "}
+          <span>{flightResult[1]}</span>
         </p>
       </FlightResultHeader>
 
@@ -78,7 +102,7 @@ export default function FlightResult() {
           {/* Counter Summary */}
           <ResultCounter>
             <ResultCounterLeft>
-              <h3>{myObject.length} results</h3>
+              <h3>{flightResult[2]?.length} results</h3>
               <p>Fares displayed are for all passengers.</p>
             </ResultCounterLeft>
 
@@ -90,7 +114,11 @@ export default function FlightResult() {
           </ResultCounter>
 
           {/* Flight Result Card  1*/}
-          <FlightResultForDepartandReturn flightSearchResultData={myObject} />
+          <FlightResultForDepartandReturn
+            flightSearchResultData={flightResult[2]}
+            setIndex={setIndex}
+            showViewDetail={showViewDetail}
+          />
         </FlightResultMain>
       </FlightResultContent>
 
@@ -109,39 +137,89 @@ export default function FlightResult() {
               <span>
                 <div>
                   <FlightIcon rotate={"90deg"} iconColor={"#0D3984"} />
-                  <h3>Flight From Abuja - Lagos</h3>
+                  <h3>{`Flight From ${flightResult[0]} - ${flightResult[1]}`}</h3>
                 </div>
                 <b>Outbound</b>
               </span>
               <DNRDetail>
                 <DNRDetailFlightImage>
-                  <img src={flightLogo} alt="" srcset="" />
+                  <img
+                    src={`https://wakanow-images.azureedge.net/Images/flight-logos/${flightResult[2][index].validatingAirlineCodes[0]}.gif`}
+                    alt={flightResult[2][index].validatingAirlineCodes[0]}
+                  />
                 </DNRDetailFlightImage>
 
                 <DNRDetailTime>
                   <span>
-                    <h3>19:45</h3>
-                    Lagos
+                    <h3>
+                      {new Date(
+                        flightResult[2][
+                          index
+                        ].itineraries[0].segments[0].departure.at
+                      ).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </h3>
+                    <AirlineCodeLookup
+                      keyWord={
+                        flightResult[2][index].itineraries[0].segments[0]
+                          .departure.iataCode
+                      }
+                    />
                   </span>
                   <span>
-                    1hr 30min
+                    {`${
+                      parseDuration(
+                        flightResult[2][index].itineraries[0].segments[0]
+                          .duration
+                      ).hours
+                    }hr ${
+                      parseDuration(
+                        flightResult[2][index].itineraries[0].segments[0]
+                          .duration
+                      ).minutes
+                    }min`}
                     <FlightIcon rotate={"90deg"} iconColor={"#0D3984"} />
-                    0-Stop
+                    {
+                      flightResult[2][index].itineraries[0].segments[0]
+                        .numberOfStops
+                    }
+                    -Stop
                   </span>
                   <span>
-                    <h3>00:05</h3>
-                    Abuja
+                    <h3>
+                      {" "}
+                      {new Date(
+                        flightResult[2][
+                          index
+                        ].itineraries[0].segments[0].arrival.at
+                      ).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </h3>
+                    <AirlineCodeLookup
+                      keyWord={
+                        flightResult[2][index].itineraries[0].segments[0]
+                          .arrival.iataCode
+                      }
+                    />
                   </span>
                 </DNRDetailTime>
 
                 <DNRDetailAirport>
-                  <div>Abuja, Nnamdi Azikwe International Airport (ABV)</div>
-                  <div>Abuja, Nnamdi Azikwe International Airport (ABV)</div>
+                  <div>Airport ({flightResult[3]})</div>
+                  <div>Airport ({flightResult[4]})</div>
                 </DNRDetailAirport>
                 <DNRDetailBaggage>
                   <span>
                     <h3>Airline</h3>
-                    Air Peace - 727 - Class W
+
+                    <AirlineFlightLogo
+                      keyWord={flightResult[2][index].validatingAirlineCodes[0]}
+                      only={true}
+                    />
                   </span>
                   <span>
                     <h3>Baggage</h3>
@@ -156,39 +234,89 @@ export default function FlightResult() {
               <span>
                 <div>
                   <FlightIcon rotate={"270deg"} iconColor={"#FF6805"} />
-                  <h3>Flight From Lagos - Abuja</h3>
+                  <h3>
+                    Flight From {flightResult[1]} - {flightResult[0]}
+                  </h3>
                 </div>
                 <b>Inbound</b>
               </span>
               <DNRDetail>
                 <DNRDetailFlightImage>
-                  <img src={flightLogo} alt="" srcset="" />
+                  <img
+                    src={`https://wakanow-images.azureedge.net/Images/flight-logos/${flightResult[2][index].validatingAirlineCodes[0]}.gif`}
+                    alt={flightResult[2][index].validatingAirlineCodes[0]}
+                  />
                 </DNRDetailFlightImage>
 
                 <DNRDetailTime>
                   <span>
-                    <h3>19:45</h3>
-                    Lagos
+                    <h3>
+                      {new Date(
+                        flightResult[2][
+                          index
+                        ].itineraries[1].segments[0].departure.at
+                      ).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </h3>
+                    <AirlineCodeLookup
+                      keyWord={
+                        flightResult[2][index].itineraries[1].segments[0]
+                          .departure.iataCode
+                      }
+                    />
                   </span>
                   <span>
-                    1hr 30min
+                    {`${
+                      parseDuration(
+                        flightResult[2][index].itineraries[1].segments[0]
+                          .duration
+                      ).hours
+                    }hr ${
+                      parseDuration(
+                        flightResult[2][index].itineraries[1].segments[0]
+                          .duration
+                      ).minutes
+                    }min`}
                     <FlightIcon rotate={"270deg"} iconColor={"#FF6805"} />
-                    0-Stop
+                    {
+                      flightResult[2][index].itineraries[1].segments[0]
+                        .numberOfStops
+                    }
+                    -Stop
                   </span>
                   <span>
-                    <h3>00:05</h3>
-                    Abuja
+                    <h3>
+                      {new Date(
+                        flightResult[2][
+                          index
+                        ].itineraries[1].segments[0].arrival.at
+                      ).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </h3>
+                    <AirlineCodeLookup
+                      keyWord={
+                        flightResult[2][index].itineraries[1].segments[0]
+                          .arrival.iataCode
+                      }
+                    />
                   </span>
                 </DNRDetailTime>
 
                 <DNRDetailAirport>
-                  <div>Abuja, Nnamdi Azikwe International Airport (ABV)</div>
-                  <div>Abuja, Nnamdi Azikwe International Airport (ABV)</div>
+                  <div>({flightResult[4]})</div>
+                  <div>({flightResult[3]})</div>
                 </DNRDetailAirport>
                 <DNRDetailBaggage>
                   <span>
                     <h3>Airline</h3>
-                    Air Peace - 727 - Class W
+                    <AirlineFlightLogo
+                      keyWord={flightResult[2][index].validatingAirlineCodes[0]}
+                      only={true}
+                    />
                   </span>
                   <span>
                     <h3>Baggage</h3>

@@ -11,20 +11,24 @@ import { MdFlight } from "react-icons/md";
 import flightLogo from "../../images/aire-peace.png";
 import AirlineFlightLogo from "./AirlineFlightLogo";
 import AirlineCodeLookup from "./AirlineCodeLookup";
-const FlightResultForDepartandReturn = ({ flightSearchResultData }) => {
+const FlightResultForDepartandReturn = ({
+  flightSearchResultData,
+  setIndex,
+  showViewDetail,
+}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const money = new Intl.NumberFormat("en-us", {
     currency: "NGN",
     style: "currency",
   });
   useEffect(() => {
-    if (currentIndex < flightSearchResultData.length) {
+    if (currentIndex < flightSearchResultData?.length) {
       const timer = setTimeout(() => {
         setCurrentIndex(currentIndex + 1);
       }, 2000); // Delay of 1 second for each item
       return () => clearTimeout(timer);
     }
-  }, [currentIndex, flightSearchResultData.length]);
+  }, [currentIndex, flightSearchResultData?.length]);
 
   // Cacula for duration
   function parseDuration(duration) {
@@ -50,7 +54,12 @@ const FlightResultForDepartandReturn = ({ flightSearchResultData }) => {
         <FlightCard key={index}>
           {/* flight logo */}
 
-          <AirlineFlightLogo keyWord={data.validatingAirlineCodes[0]} />
+          <AirlineFlightLogo
+            keyWord={data.validatingAirlineCodes[0]}
+            index={index}
+            setIndex={setIndex}
+            showViewDetail={showViewDetail}
+          />
 
           {/* Depart and Return Wrapper */}
           <FlightCardContent>

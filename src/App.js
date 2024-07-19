@@ -33,7 +33,10 @@ function App() {
             <Route path="/hotel-reservation" element={<HotelBooking />} />
             <Route path="/visa" element={<Visa />} />
             <Route path="/affiliate" element={<Affiliate />} />
-            <Route path="/trip-info" element={<TripInfo />} />
+            <Route
+              path="/trip-info/:flightResultIndex"
+              element={<TripInfo />}
+            />
           </Routes>
           <Footer /> {/*hide footer for login page */}
         </ScrollToTop>
